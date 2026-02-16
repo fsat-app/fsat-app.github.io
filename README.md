@@ -67,6 +67,7 @@ Pico CSS (MIT Licence)
 Dexie.js (Apache-2.0 license)
 Sweetalert2.js (MIT License)
 Sheetjs (Apache 2.0 License)
+AOS.js (MIT License)
 
 These libraries are the property of their respective authors and are distributed under their own licenses.
 Their licenses remain fully applicable and are not affected by the licensing terms of this repository.
