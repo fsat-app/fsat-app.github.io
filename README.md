@@ -1,11 +1,14 @@
 # FGM Self-Assessment Tool
 
-A visual self-assessment tool designed to support communication, screening, information access, care, and documentation related to Female Genital Mutilation/Cutting (FGM/C).
+A visual application for self diagnosing female genital mutilation/cutting through watercolors.
 
 ## Overview
 
-The **FGM Self-Assessment Tool** provides watercolor-based vulva illustrations to facilitate non-technical understanding and self-identification of FGM/C types.  
-It aims to enhance dialogue between patients and healthcare professionals, support early screening, and improve access to reliable information in sensitive contexts.
+This visual self-assessment tool aims to improve communication, screening, information access, care, and documentation. It can also be used for prevalence studies.
+
+It features watercolor illustrations by Florine Guenat based on selected photographs from Female Genital Mutilation/Cutting in Children and Adolescents: Illustrated Guide to Diagnose, Assess, Inform and Report.
+
+The watercolors evaluated in a study comparing women’s self-assessment of their FGM/C type with the WHO classification identified through specialist examination.
 
 ## Purpose
 
@@ -46,7 +49,28 @@ It supports communication and awareness and must always be used alongside profes
 
 ## License
 
-See the `LICENSE` file for details on usage rights and restrictions regarding both source code and visual materials.
+The watercolor images included in this repository are licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0) by Florine Guenat.
+This license requires that reusers give credit to the creator. It allows reusers to copy and distribute the material in unadapted form and for noncommercial purposes only.
+For full license details, see:
+https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+**Source Code**
+
+Unless otherwise stated, all original source code in this repository is proprietary. All rights are reserved by the authors. No one may reproduce, distribute, modify, sublicense, or create derivative works from the original source code without explicit written permission from the authors.
+
+**Third-Party Libraries**
+
+This project includes third-party libraries and dependencies, including :
+
+Chart.js (MIT License)
+Pico CSS (MIT Licence)
+Dexie.js (Apache-2.0 license)
+Sweetalert2.js (MIT License)
+Sheetjs (Apache 2.0 License)
+
+These libraries are the property of their respective authors and are distributed under their own licenses.
+Their licenses remain fully applicable and are not affected by the licensing terms of this repository.
+Please refer to each library’s official documentation or LICENSE file for details.
 
 ## Contact
 
