@@ -1,13 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-	<link rel="stylesheet" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSAT</title>
+    <link rel="manifest" href="manifest.json">
+    <script src="lib/dexie.min.js"></script>
+    <script src="lib/sweetalert2@11.js"></script>
+    <script src="lib/xlsx.full.min.js"></script>
+    <script src="lib/aos.min.js"></script>
+    <script src="lib/chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/pico.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <link rel="icon" type="image/png" href="fav/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="fav/favicon.svg" />
+    <link rel="shortcut icon" href="fav/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="fav/apple-touch-icon.png" />
+    <link rel="manifest" href="fav/site.webmanifest" />
+    <link rel="apple-touch-icon" href="fav/web-app-manifest-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="A visual application for self diagnosing female genital mutilation/cutting through watercolors. Developed by Geneva University Hospitals and University of Geneva.">
+    <meta name="keywords" content="FGM, FGM/C, female genital mutilation, self-assessment, watercolor, vulva, anatomy">
 </head>
-
 <body>
-
+    <div class="container">
+            <header>
+                <nav>
+                    <ul>
+                    <li><a href="./"><img class="round" src="img/logos/fsat.jpg"><span>FSAT</span></a></li>
+                    </ul>
+                    <ul>
+                        <li class="burger-menu"><a href="./">Home</a></li>
+                        <li class="burger-menu"><a onclick="document.querySelector('.start-btn').click()">Start</a></li>
+                        <li class="burger-menu"><a href="./#learn-about">About</a></li>
+                        <li class="burger-menu"><a href="./#how-to-use">How to use</a></li>
+                        <li class="burger-menu"><a href="https://www.hug.ch/en/gynecologie/female-genital-mutilation">HUG | FGM/C clinic</a></li>
+                    </ul>
+                </nav>
+            </header>
+    </div>
+            <div id="start-view" >
+                <div class="container">
+                    <div class="no-phone">
+                        <div class="grid">
+                            <section class="hero center clamp-3 space-x-3 no-phone" data-aos="fade-right" >
+                                <img src="img/graphics/hero.png" style="margin:auto;max-width:50vh">
+                            </section>
+                            <section >
+                                <div class="hero left clamp-3" data-aos="fade-left">
+                                    <h1><span>FSAT</span></h1>
+                                    <h2>FGM Self-Assessment Tool</h2>
+                                    <p>A visual application for self diagnosing female genital mutilation/cutting through watercolors.</p>
+                                    <small style="font-size: 0.75em;"><a href="https://www.instagram.com/vulvaportrait_fag">Vulva portrait</a> © <span style="font-size:90%">2024</span> by <a href="https://www.instagram.com/vulvaportrait_fag">Florine Guenat</a> <br> <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="img/logos/cc.png" alt="" style="max-width: 4em;max-height:1em;margin: 0 0 .3em .2em;"></small>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="center" data-aos="fade-up" data-aos-anchor="#start-view">
+                                <a role="button" href="#learn-about">Learn about <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+                                <button class="start-btn outline" style="margin-left:3em">Access the tool<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                        </div>
+                    </div>
+                    <div class="grid only-phone">
+                        <section>
+                            <div class="hero center clamp-3" data-aos="zoom-in">
+                                <h1><span>FSAT</span></h1>
+                                <h2>FGM Self-Assessment Tool</h2>
+                                <p>A visual application for self diagnosing female genital mutilation/cutting through watercolors.</p>
+                            </div>
+                            <div class="center" data-aos="fade-up" data-aos-anchor="#start-view">
+                                <div class="center">
+                                    <a role="button" href="#learn-about">Learn about <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+                                    <button class=" start-btn outline" style="margin-left:2em">Access<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="hero center clamp-3 space-x-3 only-phone">
+                            <img src="img/graphics/hero.png">
+                            <small style="font-size: 0.65em;"><a href="https://www.instagram.com/vulvaportrait_fag">Vulva portrait</a> © 2024 by <a href="https://www.instagram.com/vulvaportrait_fag">Florine Guenat</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="img/logos/cc.png" alt="" style="max-width: 4em;max-height:1em;margin: 0 0 .3em .2em;"></small>
+                        </section>
+                    </div>
+                   
+                </div>
+                <div class="plain-section">
+                    <div class="container" id="learn-about">
+                        <div class="hero space-y-3">
+                            <h1 class="center" data-aos="zoom-in">About this tool</h1>
+                            <hr>
+                            <br>
+                            <div class="grid">
+                                <div class="clamp-4 space-2" data-aos="fade-left" data-aos-anchor-placement="center-bottom">
+                                    <article >
+                                        <img src="img/graphics/body-fig-1.jpg" alt="illustration diversity">
+                                        <h4 class="space-yt-2">About the authors</h4>
+                                        <small>This tool was co-developed by Laleh Hunziker, Sophie Locher, Julien Da Costa and Jasmine Abdulcadir from <a href="https://www.hug.ch/en/gynecologie/female-genital-mutilation">Geneva University hospitals</a> and <a href="https://www.unige.ch/medecine/petri/groupes-de-recherche/jasmine-abdulcadir">University of Geneva</a>.</small>
+                                    </article>
+                                </div>
+                                <div class="space-yb-2 clamp-4 justify" style="margin:auto" data-aos="fade-right" data-aos-anchor-placement="center-bottom">
+                                    <p>This visual self-assessment tool aims to improve communication, screening, information access, care, and documentation. It can also be used for prevalence studies.</p>
+                                    <p> It features watercolor illustrations by Florine Guenat based on selected photographs from <a href="https://link.springer.com/book/10.1007/978-3-030-81736-7">Female Genital Mutilation/Cutting in Children and Adolescents: Illustrated Guide to Diagnose, Assess, Inform and Report</a>.</p>
+                                    <p> The watercolors evaluated in a study comparing women’s self-assessment of their FGM/C type with the WHO classification identified through specialist examination.</p>
+                                    <button href="" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg> <span>Access the study</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero space-y-3" >
+                            <h1 class="center" data-aos="zoom-in" id="how-to-use">How to use</h1>
+                            <hr>
+                            <br>
+                            <section>
+                                <div class="clamp-2 space-3 no-phone" style="float:left" data-aos="fade-left" data-aos-anchor-placement="center-bottom">
+                                    <img src="img/graphics/body-fig-2y.png" alt="illustration how to use">
+                                </div>
+                                <div class="justify clamp-4" style="margin:auto" data-aos="fade-right" data-aos-anchor-placement="center-bottom">
+                                    <h3><mark>For Women and the General Public</mark></h3>
+                                    <p class="left">This tool is for women and other individuals who wish to learn more about genital anatomy and the different types of FGM/C. The illustrations are intended to:
+                                    <ul>
+                                        <li>Support understanding of bodily differences</li>
+                                        <li>Help with personal recognition and naming</li>
+                                        <li>Make it easier to talk with a healthcare professional, if you choose to do so.</li>
+                                    </ul>
+                                    </p>
+                                    <p>You are not required to share your experience with anyone unless you wish to.</p>
+                                </div>
+                                <img src="img/graphics/body-fig-2w.png" class="only-phone space-yt-3" alt="illustration how to use">
+ 
+                            </section>
+                            <section class="space-yt-3">
+                                <div class="clamp-2 space-3 no-phone" style="float:right" data-aos="fade-right">
+                                    <img src="img/graphics/body-fig-2y.png" alt="illustration how to use">
+                                </div>
+                                <div class="justify clamp-4" style="margin:auto" data-aos="fade-left">
+                                    <h3><mark>For Healthcare Professionals</mark></h3>
+                                    <p>
+                                        This tool can be used during healthcare consultations to support communication with patients. It includes watercolor illustrations and simple anatomical drawings.
+                                        These images may help individuals recognize and describe their own genital anatomy, including different types of female genital mutilation/cutting (FGM/C),
+                                        as defined by the World Health Organization (WHO).
+                                    </p>
+                                    <p>With the patient’s informed consent, basic sociodemographic and clinical information may be recorded in an anonymized format for documentation, monitoring, or research, in line with ethical standards and data protection regulations.</p>
+                                </div>
+                            </section>
+                            <section data-aos="zoom-in" class="justify clamp-4" style="margin:auto">
+                                <h2 class="space-yt-3" ><mark>Important Notice</mark></h2>
+                                <p ><b>This tool is for education and support only.</b> It does not give a medical diagnosis and replace care from a trained healthcare professional. If you have questions, concerns, or health needs, you are encouraged to seek care from a qualified and trusted healthcare provider.</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="clinician-view" class="inactive"></div>
+            <div id="patient-view" class="inactive"></div>
+            <div>
+                <footer class="container">
+                    <div class="grid">
+                        <div class="space-y-2">
+                            <img src="img/logos/hug-white.png">
+                        </div>
+                        <div class="space-y-2">
+                            <img src="img/logos/fmed-white.png">
+                        </div>
+                        <small class="space-y-2">
+                            <a href="https://www.hug.ch/en/gynecologie/female-genital-mutilation">HUG | Female Genital Mutilation</a><br>
+                            —<br>
+                            Prof. Jasmine Abdulcadir<br>
+                            <a href="mailto:jasmine.Abdulcadir@hug.ch">jasmine.Abdulcadir@hug.ch</a>
+                        </small>
+                    </div>
+                    <div class="space-y-3 ">
+                        <small>© 2025 Plateforme d'anatomie numérique | UNIGE</small>
+                    </div>
+                  
+                </footer>
+            </div>
+    <script src="app/fsat.min.js"></script>
 </body>
 </html>
