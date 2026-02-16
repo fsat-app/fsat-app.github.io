@@ -1,7 +1,7 @@
 // sw.js (Service Worker)
 const CACHE_NAME = 'aquarelle-pwa-cache-v57';
 
-const ROOT = "/fsat-app/"
+const ROOT = "/"
 
 const urlsToCache = [
    ROOT,
@@ -120,4 +120,5 @@ self.addEventListener('fetch', event => {
                 });
             })
     );
+
 });
