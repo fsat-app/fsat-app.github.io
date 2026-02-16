@@ -2,9 +2,9 @@
   "name": "FGM Self-Assessment Tool",
   "short_name": "FSAT",
   "description": "Watercolor-based self-assessment tool for Female Genital Mutilation/Cutting (FGM/C)",
-  "id":  "/fsat-app/",
-  "start_url": "/fsat-app/",
-  "scope": "/fsat-app/",
+  "id":  "/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#ffffff",
@@ -12,16 +12,17 @@
   "lang": "en",
   "icons": [
     {
-      "src": "/fsat-app/fav/web-app-manifest-192x192.png",
+      "src": "/fav/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/fsat-app/fav/web-app-manifest-512x512.png",
+      "src": "/fav/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
   ]
+
 }
