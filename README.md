@@ -1,6 +1,7 @@
 # FGM Self-Assessment Tool
 
 A visual application for self diagnosing female genital mutilation/cutting through watercolors.
+[https://fsat-app.github.io](https://fsat-app.github.io)
 
 ## Overview
 
@@ -58,7 +59,7 @@ For authentication, clinician passwords and security answers are hashed with SHA
 The watercolor images included in this repository are licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0) by Florine Guenat.
 This license requires that reusers give credit to the creator. It allows reusers to copy and distribute the material in unadapted form and for noncommercial purposes only.
 For full license details, see:
-https://creativecommons.org/licenses/by-nc-nd/4.0/
+[https://creativecommons.org/licenses/by-nc-nd/4.0](https://creativecommons.org/licenses/by-nc-nd/4.0)
 
 **Source Code**
 
