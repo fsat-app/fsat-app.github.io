@@ -47,6 +47,10 @@ It supports communication and awareness and must always be used alongside profes
 - Source material from the illustrated guide on FGM/C in children and adolescents.  
 - All contributors involved in the conception, evaluation, and scientific validation of the tool.
 
+## Privacy and Data 
+This application is a Progressive Web App (PWA) that uses Dexie.js for local IndexedDB storage and offline functionality. All clinician and patient data is stored in the browser and never transmitted to external servers without explicit user consent. Synchronization is anonymous: before sending, personal identifiers (names and emails) are stripped from records is shared for research purposes. Exports to CSV/Excel are pseudonymized (using hash-based composed IDs) .
+For authentication, clinician passwords and security answers are hashed with SHA-256. No full-database encryption is applied, relying on browser security and isolation. Users can soft-delete records (marked for sync) or fully erase the local database at any time. 
+
 ## License
 
 The watercolor images included in this repository are licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0) by Florine Guenat.
