@@ -48,7 +48,9 @@ It supports communication and awareness and must always be used alongside profes
 - All contributors involved in the conception, evaluation, and scientific validation of the tool.
 
 ## Privacy and Data 
+
 This application is a Progressive Web App (PWA) that uses Dexie.js for local IndexedDB storage and offline functionality. All clinician and patient data is stored in the browser and never transmitted to external servers without explicit user consent. Synchronization is anonymous: before sending, personal identifiers (names and emails) are stripped from records is shared for research purposes. Exports to CSV/Excel are pseudonymized (using hash-based composed IDs) .
+
 For authentication, clinician passwords and security answers are hashed with SHA-256. No full-database encryption is applied, relying on browser security and isolation. Users can soft-delete records (marked for sync) or fully erase the local database at any time. 
 
 ## License
@@ -84,7 +86,5 @@ For inquiries, collaborations, or research use:
 **Project Lead**  
 Pre Jasmine Abdulcadir
 jasmine.Abdulcadir@hug.ch
-Dre Sophie Locher
-sophie.locher@hug.ch
 
 
