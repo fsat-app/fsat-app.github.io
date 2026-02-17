@@ -1,6 +1,7 @@
 # FGM Self-Assessment Tool
 
 A visual application for self diagnosing female genital mutilation/cutting through watercolors.
+
 [https://fsat-app.github.io](https://fsat-app.github.io)
 
 ## Overview
