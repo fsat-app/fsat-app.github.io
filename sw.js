@@ -1,5 +1,5 @@
 // sw.js (Service Worker)
-const CACHE_NAME = 'aquarelle-pwa-cache-v60';
+const CACHE_NAME = 'aquarelle-pwa-cache-v61';
 
 const ROOT = "/"
 
@@ -122,4 +122,5 @@ self.addEventListener('fetch', event => {
     );
 
 });
+
 
