@@ -1,4 +1,4 @@
-# FGM Self-Assessment Tool
+# FGM/C Self-Assessment Tool
 
 A visual application for self diagnosing female genital mutilation/cutting through watercolors.
 
