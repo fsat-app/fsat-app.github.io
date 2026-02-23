@@ -1,5 +1,5 @@
 // sw.js
-const CACHE_NAME = 'fsat-pwa-cache-v72';
+const CACHE_NAME = 'fsat-pwa-cache-v73';
 
 const STATIC_ASSETS = [
   '/index.html',
@@ -11,7 +11,7 @@ const STATIC_ASSETS = [
   '/app/fsat.min.js',
   '/manifest.json',
   '/css/aos.min.css',
-  '/css/custom.css',
+  '/css/custom.min.css',
   '/css/pico.min.css',
   '/css/font/Zain-ExtraLight.ttf',
   '/css/font/Zain-Light.ttf',
@@ -169,3 +169,4 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
