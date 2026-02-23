@@ -2,7 +2,6 @@
 const CACHE_NAME = 'fsat-pwa-cache-v69';
 
 const STATIC_ASSETS = [
-  '/',
   '/index.html',
   '/lib/dexie.min.js',
   '/lib/sweetalert2@11.js',
@@ -141,5 +140,6 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
 
 
