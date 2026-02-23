@@ -1,8 +1,6 @@
 // sw.js (Service Worker)
-const CACHE_NAME = 'aquarelle-pwa-cache-v63';
-
+const CACHE_NAME = 'aquarelle-pwa-cache-v64';
 const ROOT = "/"
-
 const urlsToCache = [
    ROOT,
    ROOT + 'index.html',
@@ -67,7 +65,6 @@ const urlsToCache = [
    ROOT + 'fav/web-app-manifest-192x192.png',
    ROOT + 'fav/web-app-manifest-512x512.png'
 ];
-
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -75,10 +72,9 @@ self.addEventListener('install', event => {
                 console.log('Caching files:', urlsToCache);
                 return cache.addAll(urlsToCache);
             })
-            .then(() => self.skipWaiting())  
+            .then(() => self.skipWaiting())
     );
 });
-
 self.addEventListener('activate', event => {
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
@@ -93,47 +89,27 @@ self.addEventListener('activate', event => {
                     })
                 );
             }),
-            self.clients.claim()  
+            self.clients.claim()
         ])
     );
 });
-
 self.addEventListener('fetch', event => {
     if (event.request.method !== 'GET') return;
     let requestUrl = new URL(event.request.url);
     let cacheKey = requestUrl.pathname;
-   
-    if (cacheKey === '/' || cacheKey === '') {
-        cacheKey = '/index.html';
+    // Normalise la racine
+    if (cacheKey === ROOT || cacheKey === ROOT.slice(0, -1)) {
+        cacheKey = ROOT + 'index.html';
     }
-   
     event.respondWith(
-        caches.match(cacheKey).then(cachedResponse => {
-            if (cachedResponse) {
-                return cachedResponse;
-            }
-            // Essaie le réseau
-            return fetch(event.request).then(networkResponse => {
-                // Optionnel : ajoute au cache dynamiquement
-                return caches.open(CACHE_NAME).then(cache => {
-                    cache.put(cacheKey, networkResponse.clone());
-                    return networkResponse;
-                });
-            }).catch(() => {
-                // Fallback différencié
-                if (event.request.destination === 'image') {
-                    return caches.match('/img/placeholder.png');  
-                } else if (event.request.destination === 'document') {
-                    return caches.match('/index.html');
+        caches.match(cacheKey)
+            .then(response => {
+                if (response) {
+                    return response;
                 }
-            });
-        })
+                return fetch(event.request).catch(() => {
+                    return caches.match(ROOT + 'index.html');
+                });
+            })
     );
 });
-
-
-
-
-
-
-
