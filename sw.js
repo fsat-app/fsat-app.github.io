@@ -1,5 +1,5 @@
 // sw.js
-const CACHE_NAME = 'fsat-pwa-cache-v68';
+const CACHE_NAME = 'fsat-pwa-cache-v69';
 
 const STATIC_ASSETS = [
   '/',
@@ -141,4 +141,5 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
 
