@@ -1,5 +1,5 @@
 // sw.js (Service Worker)
-const CACHE_NAME = 'aquarelle-pwa-cache-v62';
+const CACHE_NAME = 'aquarelle-pwa-cache-v63';
 
 const ROOT = "/"
 
@@ -100,28 +100,41 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
     if (event.request.method !== 'GET') return;
-
     let requestUrl = new URL(event.request.url);
     let cacheKey = requestUrl.pathname;
-
-    // Normalise la racine
-    if (cacheKey === ROOT || cacheKey === ROOT.slice(0, -1)) { 
-        cacheKey = ROOT + 'index.html';
+   
+    if (cacheKey === '/' || cacheKey === '') {
+        cacheKey = '/index.html';
     }
-
+   
     event.respondWith(
-        caches.match(cacheKey)
-            .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).catch(() => {
-                    return caches.match(ROOT + 'index.html');
+        caches.match(cacheKey).then(cachedResponse => {
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+            // Essaie le réseau
+            return fetch(event.request).then(networkResponse => {
+                // Optionnel : ajoute au cache dynamiquement
+                return caches.open(CACHE_NAME).then(cache => {
+                    cache.put(cacheKey, networkResponse.clone());
+                    return networkResponse;
                 });
-            })
+            }).catch(() => {
+                // Fallback différencié
+                if (event.request.destination === 'image') {
+                    // Retourne une image placeholder si disponible, sinon laisse échouer
+                    return caches.match('/img/placeholder.png');  // Ajoutez une placeholder dans urlsToCache si besoin
+                } else if (event.request.destination === 'document') {
+                    return caches.match('/index.html');
+                }
+                // Pour autres (JS, CSS), laisse échouer
+            });
+        })
     );
-
 });
+
+
+
 
 
 
