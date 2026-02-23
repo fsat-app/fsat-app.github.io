@@ -1,5 +1,5 @@
 // sw.js (Service Worker)
-const CACHE_NAME = 'aquarelle-pwa-cache-v64';
+const CACHE_NAME = 'aquarelle-pwa-cache-v65';
 const ROOT = "/"
 const urlsToCache = [
    ROOT,
@@ -27,8 +27,6 @@ const urlsToCache = [
    ROOT + 'img/logos/fmed-white.png',
    ROOT + 'img/logos/cc.png',
    ROOT + 'img/logos/fsat.jpg',
-   ROOT + 'img/icons/icon-gallery.png',
-   ROOT + 'img/icons/icon-checkup.png',
    ROOT + 'img/graphics/body-bg-top.jpg',
    ROOT + 'img/graphics/body-fig-1.jpg',
    ROOT + 'img/graphics/body-fig-2w.png',
@@ -113,3 +111,4 @@ self.addEventListener('fetch', event => {
             })
     );
 });
+
