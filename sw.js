@@ -14,7 +14,6 @@ const STATIC_ASSETS = [
   '/css/aos.min.css',
   '/css/custom.css',
   '/css/pico.min.css',
-  '/font/style.css',
   '/css/font/Zain-ExtraLight.ttf',
   '/css/font/Zain-Light.ttf',
   '/css/font/Zain-Regular.ttf',
@@ -142,3 +141,4 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
