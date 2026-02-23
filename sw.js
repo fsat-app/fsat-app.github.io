@@ -122,16 +122,15 @@ self.addEventListener('fetch', event => {
             }).catch(() => {
                 // Fallback différencié
                 if (event.request.destination === 'image') {
-                    // Retourne une image placeholder si disponible, sinon laisse échouer
-                    return caches.match('/img/placeholder.png');  // Ajoutez une placeholder dans urlsToCache si besoin
+                    return caches.match('/img/placeholder.png');  
                 } else if (event.request.destination === 'document') {
                     return caches.match('/index.html');
                 }
-                // Pour autres (JS, CSS), laisse échouer
             });
         })
     );
 });
+
 
 
 
