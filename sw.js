@@ -1,5 +1,5 @@
 // sw.js
-const CACHE_NAME = 'fsat-pwa-cache-v69';
+const CACHE_NAME = 'fsat-pwa-cache-v70';
 
 console.log(CACHE_NAME)
 
@@ -142,6 +142,7 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
 
 
 
