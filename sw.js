@@ -1,7 +1,5 @@
 // sw.js
-const CACHE_NAME = 'fsat-pwa-cache-v70';
-
-console.log(CACHE_NAME)
+const CACHE_NAME = 'fsat-pwa-cache-v72';
 
 const STATIC_ASSETS = [
   '/index.html',
@@ -68,9 +66,28 @@ const STATIC_ASSETS = [
 // INSTALL
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(STATIC_ASSETS))
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then(async cache => {
+
+      for (const url of STATIC_ASSETS) {
+        try {
+          const response = await fetch(url, {
+            cache: 'no-cache',
+            credentials: 'same-origin'
+          });
+
+          if (!response || !response.ok) {
+            console.warn('Not caching (bad response):', url);
+            continue;
+          }
+
+          await cache.put(url, response.clone());
+
+        } catch (err) {
+          console.warn('Not caching (fetch failed):', url);
+        }
+      }
+
+    }).then(() => self.skipWaiting())
   );
 });
 
@@ -99,18 +116,26 @@ self.addEventListener('fetch', event => {
   const request = event.request;
   const url = new URL(request.url);
 
-  // Ne pas intercepter les requêtes externes
+  // Ignorer requêtes externes
   if (url.origin !== location.origin) return;
 
-  // 1️⃣ Navigation HTML → network-first
+  const cacheKey = url.pathname;
+
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
         .then(response => {
+
+          if (!response || !response.ok) {
+            throw new Error('Network response invalid');
+          }
+
           const clone = response.clone();
+
           caches.open(CACHE_NAME).then(cache => {
             cache.put('/index.html', clone);
           });
+
           return response;
         })
         .catch(() => caches.match('/index.html'))
@@ -118,23 +143,25 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // 2️⃣ Assets statiques → cache-first avec fallback réseau
   event.respondWith(
-    caches.match(request, { ignoreSearch: true })
+    caches.match(cacheKey, { ignoreSearch: true })
       .then(cachedResponse => {
+
         if (cachedResponse) {
           return cachedResponse;
         }
 
         return fetch(request)
           .then(networkResponse => {
+
             if (!networkResponse || networkResponse.status !== 200) {
               return networkResponse;
             }
 
             const clone = networkResponse.clone();
+
             caches.open(CACHE_NAME).then(cache => {
-              cache.put(request, clone);
+              cache.put(cacheKey, clone);
             });
 
             return networkResponse;
@@ -142,8 +169,3 @@ self.addEventListener('fetch', event => {
       })
   );
 });
-
-
-
-
-
