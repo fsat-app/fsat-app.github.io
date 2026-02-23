@@ -1,7 +1,8 @@
-// sw.js (Service Worker)
-const CACHE_NAME = 'aquarelle-pwa-cache-v66';
-const urlsToCache = [
-   '/',
+// sw.js
+const CACHE_NAME = 'fsat-pwa-cache-v68';
+
+const STATIC_ASSETS = [
+  '/',
   '/index.html',
   '/lib/dexie.min.js',
   '/lib/sweetalert2@11.js',
@@ -62,54 +63,82 @@ const urlsToCache = [
   '/fav/web-app-manifest-192x192.png',
   '/fav/web-app-manifest-512x512.png'
 ];
+
+
+// INSTALL
 self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => {
-                console.log('Caching files:', urlsToCache);
-                return cache.addAll(urlsToCache);
-            })
-            .then(() => self.skipWaiting())
-    );
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(STATIC_ASSETS))
+      .then(() => self.skipWaiting())
+  );
 });
+
+
+// ACTIVATE
 self.addEventListener('activate', event => {
-    const cacheWhitelist = [CACHE_NAME];
-    event.waitUntil(
-        Promise.all([
-            caches.keys().then(cacheNames => {
-                return Promise.all(
-                    cacheNames.map(cacheName => {
-                        if (!cacheWhitelist.includes(cacheName)) {
-                            console.log('Deleting old cache:', cacheName);
-                            return caches.delete(cacheName);
-                        }
-                    })
-                );
-            }),
-            self.clients.claim()
-        ])
-    );
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      )
+    ).then(() => self.clients.claim())
+  );
 });
+
+
+// FETCH
 self.addEventListener('fetch', event => {
-    if (event.request.method !== 'GET') return;
-    let requestUrl = new URL(event.request.url);
-    let cacheKey = requestUrl.pathname;
-    // Normalise la racine
-    if (cacheKey === '/') {
-       cacheKey ='/index.html';
-    }
+
+  if (event.request.method !== 'GET') return;
+
+  const request = event.request;
+  const url = new URL(request.url);
+
+  // Ne pas intercepter les requêtes externes
+  if (url.origin !== location.origin) return;
+
+  // 1️⃣ Navigation HTML → network-first
+  if (request.mode === 'navigate') {
     event.respondWith(
-        caches.match(cacheKey)
-            .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).catch(() => {
-                    return caches.match('/index.html');
-                });
-            })
+      fetch(request)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put('/index.html', clone);
+          });
+          return response;
+        })
+        .catch(() => caches.match('/index.html'))
     );
+    return;
+  }
+
+  // 2️⃣ Assets statiques → cache-first avec fallback réseau
+  event.respondWith(
+    caches.match(request, { ignoreSearch: true })
+      .then(cachedResponse => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        return fetch(request)
+          .then(networkResponse => {
+            if (!networkResponse || networkResponse.status !== 200) {
+              return networkResponse;
+            }
+
+            const clone = networkResponse.clone();
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(request, clone);
+            });
+
+            return networkResponse;
+          });
+      })
+  );
 });
-
-
-
