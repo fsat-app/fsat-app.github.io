@@ -156,7 +156,7 @@
                                 <div>
                                     <div class="video-player">
                                         <video id="video" preload="metadata">
-                                            <source src="asset/fsat-.mp4" type="video/mp4">
+                                            <source src="asset/fsat-FR.mp4" type="video/mp4">
                                         </video>
 
                                         <button class="play-button" id="playButton" aria-label="Lire la vidéo">
@@ -168,7 +168,19 @@
                                         </script>
                                     </div>
                                     <div class="center space-1">
-                                        <a><svg style="margin-right:0.33em" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>French audio</a>
+                                        <a id="video-language">
+                                            <svg style="margin-right:0.33em" viewBox="0 0 24 24" width="24" height="24"
+                                                stroke="currentColor" stroke-width="2" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                            </svg>
+                                            <span>French audio</span>
+                                        </a> 
+                                        <script>
+                                            const languageText=languageButton.querySelector("span");languageButton.addEventListener("click",()=>{video.pause(),video.controls=!1,video.currentTime=0,isFrench?(source.src="asset/fsat-EN.mp4",languageText.textContent="French audio",isFrench=!1):(source.src="asset/fsat-FR.mp4",languageText.textContent="English audio",isFrench=!0),video.load(),playButton.classList.remove("hidden")});
+                                        </script>  
                                     </div>
                                 </div>
                                 
